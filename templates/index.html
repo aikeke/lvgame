@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>蜀醉游戏管理系统</title>
+</head>
+<body>
+    <div style="height: 48px;background-color: #0779af; margin: -10px;text-align:center;color: white;font-weight: 800;line-height: 48px">蜀醉游戏管理系统
+    </div>
+    <div>
+        <div style="position: fixed;top: 48px;left: 0px;width: 200px;bottom: 0;background-color: grey">
+            <a style="vertical-align:middle;" href="/host/">主机管理</a><br/>
+            <a style="vertical-align:middle;" href="/game_iptables_check/">游戏对外检查</a><br/>
+            <a style="vertical-align:middle;" href="/login_iptables_check/">登录对外检查</a><br/>
+            <a style="vertical-align:middle;" href="/game_check/">游戏进程检查</a><br/>
+            <a style="vertical-align:middle;" href="/login_check/">登录进程检查</a><br/>
+            <a style="vertical-align:middle;" href="/update/">更新机注册检查</a><br/>
+            <a style="vertical-align:middle;" href="/ver/">蜀醉版本号</a><br/>
+            <a style="vertical-align:middle;" href="/cron/">蜀醉定时任务检查</a><br/>
+            <a style="vertical-align:middle;" href="/ftp_file/">批量拉取文件</a><br/>
+        </div>
+        <div style="position: fixed;top: 48px;left: 200px;right: 0px;bottom: 0;background-color: white;text-align:center;font-weight: 800;overflow:scroll;white-space:pre;">{% block content %} {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

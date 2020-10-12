@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% block content %}<div style="position:fixed;top:48px;left:300px;height:500px;">游戏服务器
+{% for key,value in game.items %}{{ key }} {{ value }}
+{% endfor %}</div>
+<div style="position:fixed;top:48px;left:400px;right:400px;height:500px;">登录服务器
+{% for key,value in login.items %}{{ key }} {{ value }}
+{% endfor %}</div>
+<div style="position:fixed;top:48px;right:300px;height:500px;">战场服务器
+{% for key,value in war.items %}{{ key }} {{ value }}
+{% endfor %}</div>
+<div  style="position:fixed;left:800px;top:500px;">
+<form method='POST' action='/host/'>
+<span style='display:inline-block;width:100px;'>主机名:</span><input type='text' name='hostname' required='required'>
+
+<span style='display:inline-block;width:100px;'>ip:</span><input type='text' name='hostip' required='required'>
+
+<span style='display:inline-block;width:100px;'>密码:</span><input type='text' name='hostpass' required='required'>
+
+<button type='submit' value='add' name='ac'>增加主机</button>  <button type='submit' value='delete' name='ac'>删除主机</button>
+</form>
+</div>
+{% endblock %}
