@@ -1,7 +1,7 @@
 import logging
 import os
 LOG_PATH='/var/log/lvanops/access.log'
-LOG_LEVEL='DEBUG'
+LOG_LEVEL='INFO'
 LOG_FORMAT='%(levelname)s - %(asctime)s - %(name)s - %(module)s - %(message)s'
 def get_logger(name=None):
     logger=logging.getLogger(name)
