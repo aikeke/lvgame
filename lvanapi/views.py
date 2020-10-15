@@ -1,6 +1,8 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 import sys
 sys.path.append('../')
+from lvanapi import models
+from functools import wraps
 from src import game_wall_check
 from src import login_wall_check
 from src import crontab_check
@@ -9,6 +11,16 @@ from src import version_check
 from src import game_status
 from src import modify_host
 from src import get_logger
+
+def check_login(func):
+    @wraps(func)
+    def wrapper(request,*args,**kwargs):
+        if request.session.get('is_login')=='1':
+            return func(request,*args,**kwargs)
+        else:
+            return redirect('/login/')
+    return wrapper
+
 def sep(data):
     zxy={}
     sm={}
@@ -19,34 +31,48 @@ def sep(data):
             sm[key]=values
     return sm,zxy
 # Create your views here.
+
+@check_login
 def index(request):
-    return render(request,'login.html')
-def login(request):
-    return render(request,'login.html')
+    return render(request,'index.html')
+
+@check_login
 def game_iptables_check(request):
     data=game_wall_check.check()
     sm,zxy=sep(data)
     return render(request,'game_iptables_check.html',{"sm": sm,"zxy":zxy})
+
+@check_login
 def login_iptables_check(request):
     data=login_wall_check.check()
     sm,zxy=sep(data)
     return render(request,'login_iptables_check.html',{"sm": sm,"zxy":zxy})
+
+@check_login
 def ver(request):
     data=version_check.check()
     sm,zxy=sep(data)
     return render(request,'version_check.html',{"sm": sm,"zxy":zxy})
+
+@check_login
 def update(request):
     data=update_register_check.check()
     sm,zxy=sep(data)
     return render(request,'update.html',{"sm": sm,"zxy":zxy})
+
+@check_login
 def game_check(request):
     data=game_status.check()
     sm,zxy=sep(data)
     return render(request,'game_check.html',{"sm": sm,"zxy":zxy})
+
+@check_login
 def cron(request):
     data=crontab_check.check()
     sm,zxy=sep(data)
     return render(request,'cron_check.html',{"sm": sm,"zxy":zxy})
+
+@check_login
 def host(request):
     if request.method=='GET':
         data=modify_host.scan_host()
@@ -70,4 +96,15 @@ def host(request):
         return render(request,'login.html')
 
 
+def login(request):
+    if request.method=='GET':
+        return render(request,'login.html')
+    elif request.method=='POST':
+        username=request.POST.get('user')
+        pwd=request.POST.get('pass')
+        user=models.UserInfo.objects.filter(username=username,password=pwd)
+        if user:
+            request.session['is_login']='1'
+            return redirect('/index/')
+        return redirect('/login/')
 

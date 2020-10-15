@@ -1,5 +1,6 @@
 {% extends "index.html" %}
 {% block content %}
+<h1>请先登录</h1>
 <form method='POST' action='/login/'>
 
 
@@ -8,7 +9,7 @@
 
 <span style='display:inline-block;width:100px;'>用户名:</span><input type='text' name='user'>
 
-<span style='display:inline-block;width:100px;'>密码:</span><input type='text' name='user'>
+<span style='display:inline-block;width:100px;'>密码:</span><input type='password' name='pass'>
 
 <input type='submit' value='提交'>  <input type='submit' value='忘记密码'>
 </form>

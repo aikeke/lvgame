@@ -13,7 +13,7 @@ def get_cron(key,value,port=2208,user="master"):
     ssh_obj=Ssh(value,2208,"master",redis_obj.get(value))
     try:
         ssh_obj.connect()
-        result=ssh_obj.cmd('''cat /etc/crontab|wc -l ''',sudo=True)
+        result,err=ssh_obj.cmd('''cat /etc/crontab|wc -l ''',sudo=True)
         wall_num=result.strip()
         res[key]=wall_num
     except Exception as e:

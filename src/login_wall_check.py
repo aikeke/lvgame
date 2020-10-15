@@ -13,7 +13,7 @@ def get_loginwall(key,value,port=2208,user="master"):
     ssh_obj=Ssh(value,2208,"master",redis_obj.get(value))
     try:
         ssh_obj.connect()
-        result=ssh_obj.cmd('''cat /etc/sysconfig/iptables|grep '#'|wc -l ''',sudo=True)
+        result,err=ssh_obj.cmd('''cat /etc/sysconfig/iptables|grep '#'|wc -l ''',sudo=True)
         wall_num=result.strip()
         if wall_num == '2':
             res[key]='open'

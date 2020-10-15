@@ -13,7 +13,7 @@ def get_version(key,value,port=2208,user="master"):
     ssh_obj=Ssh(value,port,user,redis_obj.get(value))
     ssh_obj.connect()
     try:
-        result=ssh_obj.cmd('''cat /ss/login/ver|grep name ''')
+        result,err=ssh_obj.cmd('''cat /ss/login/ver|grep name ''')
         version=result.strip().split()[2]
         ver[key]=version
     except Exception as e:

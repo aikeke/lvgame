@@ -13,7 +13,7 @@ def get_gamestatus(key,value,port=2208,user="master"):
     ssh_obj=Ssh(value,2208,"master",redis_obj.get(value))
     try:    
         ssh_obj.connect()
-        result=ssh_obj.cmd('ps -ef|grep server|grep -v grep|wc -l')
+        result,err=ssh_obj.cmd('ps -ef|grep server|grep -v grep|wc -l')
         result=result.strip()
         if result == '6':
             res[key]='ok'

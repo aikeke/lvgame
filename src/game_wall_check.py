@@ -10,10 +10,10 @@ res={}
 def get_gamewall(key,value,port=2208,user="master"):
     global res
     redis_obj=get_redis()
-    ssh_obj=Ssh(value,2208,"master",redis_obj.get(value))
+    ssh_obj=Ssh(value,2208,user,redis_obj.get(value))
     try:
         ssh_obj.connect()    
-        result=ssh_obj.cmd('''cat /etc/sysconfig/iptables|grep '#'|wc -l ''',sudo=True)
+        result,err=ssh_obj.cmd('''cat /etc/sysconfig/iptables|grep '#'|wc -l ''',sudo=True)
         wall_num=result.strip()
         if wall_num == '2':
             res[key]='open'
@@ -40,7 +40,10 @@ def check():
     return res
 
 if __name__=='__main__':
-    result=check()
+    redis_obj=get_redis()
+    data=redis_obj.hgetall('game_server')
+    #result=inside_iptables("smsxry9game2","10.1.11.130")
+    result=outer_iptables("smsxry9game2","10.1.11.130")
     print result
 
 

@@ -22,8 +22,8 @@ class Ssh(object):
             stdin.flush()
         else:
             stdin,stdout,stderr=ssh_client.exec_command(command)
-        result=stdout.read()+stderr.read()
-        return result
+        res,err=stdout.read(),stderr.read()
+        return res,err
     def getfile(self,remote_path,local_path):
         sftp=paramiko.SFTPClient.from_transport(self.__transport)
         sftp.get(remote_path,local_path)

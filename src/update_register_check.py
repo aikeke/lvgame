@@ -13,7 +13,7 @@ def get_update(key,value,port=2208,user="master"):
     ssh_obj=Ssh(value,2208,"master",redis_obj.get(value))
     try:
         ssh_obj.connect()
-        result=ssh_obj.cmd(''' grep 'Up' `ls -rt /ss/login/log/login*|tail -1` ''')
+        result,err=ssh_obj.cmd(''' grep 'Up' `ls -rt /ss/login/log/login*|tail -1` ''')
         update=result.strip()
         res[key]=update
     except Exception as e:
