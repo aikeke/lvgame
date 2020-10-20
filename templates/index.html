@@ -2,24 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>蜀醉游戏管理系统</title>
+    <title>游戏管理系统</title>
+    <style>
+        a {
+            text-decoration: none;
+            vertical-align: middle;
+            color: black;
+            font-size: 18px;
+          }
+        .pgleft {
+            position: fixed;top: 48px;left: 0px;width: 200px;bottom: 0;background-color: grey;
+        }
+        a:hover {
+            color: #2440B3;
+            text-decoration: underline;
+        }
+        .iptables_rules {
+            display: inline-block;
+            font-size: 18px;
+        }
+        .iptables_rules a{
+            display: none;
+        }
+        .iptables_rules:hover a{
+            display: block;
+            font-size: 15px;
+        }
+    </style>
 </head>
 <body>
     <div style="height: 48px;background-color: #0779af; margin: -10px;text-align:center;color: white;font-weight: 800;line-height: 48px">蜀醉游戏管理系统
     </div>
     <div>
-        <div style="position: fixed;top: 48px;left: 0px;width: 200px;bottom: 0;background-color: grey">
-            <a style="vertical-align:middle;" href="/host/">主机管理</a><br/>
-            <a style="vertical-align:middle;" href="/game_iptables_check/">游戏对外检查</a><br/>
-            <a style="vertical-align:middle;" href="/login_iptables_check/">登录对外检查</a><br/>
-            <a style="vertical-align:middle;" href="/game_check/">游戏进程检查</a><br/>
-            <a style="vertical-align:middle;" href="/login_check/">登录进程检查</a><br/>
-            <a style="vertical-align:middle;" href="/update/">更新机注册检查</a><br/>
-            <a style="vertical-align:middle;" href="/ver/">蜀醉版本号</a><br/>
-            <a style="vertical-align:middle;" href="/cron/">蜀醉定时任务检查</a><br/>
-            <a style="vertical-align:middle;" href="/ftp_file/">批量拉取文件</a><br/>
+        <div class="pgleft">
+            <a href="/host/">主机管理</a><br/>
+            <a href="/game_iptables_check/">游戏对外检查</a><br/>
+            <a href="/login_iptables_check/">登录对外检查</a><br/>
+            <a href="/game_check/">游戏进程检查</a><br/>
+            <a href="/login_check/">登录进程检查</a><br/>
+            <a href="/update/">更新机注册检查</a><br/>
+            <a href="/ver/">蜀醉版本号</a><br/>
+            <a href="/cron/">蜀醉定时任务检查</a><br/>
+            <a href="/ftp_file/">批量拉取文件</a><br/>
+            <div class="iptables_rules">防火墙策略(维护用)<br/>
+              <a href="/iptables?rules=lgoff">所有登录服务器对内</a>
+              <a href="/iptables?rules=lgon">所有登录服务器对外</a>
+              <a href="/iptables?rules=gmoff">所有游戏服务器对内</a>
+              <a href="/iptables?rules=gmon">所有游戏服务器对外</a>
+            </div>
         </div>
-        <div style="position: fixed;top: 48px;left: 200px;right: 0px;bottom: 0;background-color: white;text-align:center;font-weight: 800;overflow:scroll;white-space:pre;">{% block content %} {% endblock %}
+        <div style="position: fixed;top: 48px;left: 200px;right: 0px;bottom: 0;background-color: white;text-align:center;font-weight: 800;overflow:auto;white-space:pre;">{% block content %} {% endblock %}
         </div>
     </div>
 </body>

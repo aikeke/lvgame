@@ -29,13 +29,34 @@ def modify_iptables(cmd_str,key,value,port=2208,user="lvantech"):
             if err.strip():
                 ans[key]=err
             else:
-                ans[key]='sucess'
+                ans[key]='success'
     except Exception as e:
-        res[key]='wrong'
-        get_logger().error("pass is wrong")
+        ans[key]='pass is wrong'
         pass
-    return ans
+    #get_logger('modify_iptables').info(ans)
 
+def excute_iptables(argv):
+    redis_obj=get_redis()
+    if argv=='gmoff':
+        data=redis_obj.hgetall('smgame_server')
+        for key,value in data.items():
+            modify_iptables(game_inside_cmd,key,value)
+        get_logger('modify_iptables').info(ans)
+    elif argv=='gmon':
+        data=redis_obj.hgetall('smgame_server')
+        for key,value in data.items():
+            modify_iptables(game_outer_cmd,key,value)
+        get_logger('modify_iptables').info(ans)
+    elif argv=='lgoff':
+        data=redis_obj.hgetall('smlogin_server')
+        for key,value in data.items():
+            modify_iptables(login_inside_cmd,key,value)
+        get_logger('modify_iptables').info(ans)
+    elif argv=='lgon':
+        data=redis_obj.hgetall('smlogin_server')
+        for key,value in data.items():
+            modify_iptables(login_outer_cmd,key,value)
+        get_logger('modify_iptables').info(ans)
 
 if __name__=='__main__':
     prompt='''please input your choice:
@@ -64,4 +85,4 @@ if __name__=='__main__':
             result=modify_iptables(login_outer_cmd,key,value)
     else:
         exit("输入异常")
-    print(result)
+    print(ans)

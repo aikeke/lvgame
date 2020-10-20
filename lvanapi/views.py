@@ -10,6 +10,7 @@ from src import update_register_check
 from src import version_check
 from src import game_status
 from src import modify_host
+from src import modify_iptables
 from src import get_logger
 
 def check_login(func):
@@ -71,6 +72,15 @@ def cron(request):
     data=crontab_check.check()
     sm,zxy=sep(data)
     return render(request,'cron_check.html',{"sm": sm,"zxy":zxy})
+
+@check_login
+def iptables(request):
+    rule=request.GET.get('rules')
+    #modify_iptables.excute_iptables(rule)
+    if rule=='gmoff' or rule=='gmon':
+        return redirect('/game_iptables_check/')
+    else:
+        return redirect('/login_iptables_check/')
 
 @check_login
 def host(request):
