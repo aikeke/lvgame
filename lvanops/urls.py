@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^game_iptables_check/', views.game_iptables_check),
     url(r'^login_iptables_check/', views.login_iptables_check),
     url(r'^game_check/', views.game_check),
-    #url(r'^login_check/', views.login_check),
+    url(r'^login_check/', views.login_check),
     url(r'^ver/', views.ver),
     url(r'^cron/', views.cron),
     url(r'^update/', views.update),

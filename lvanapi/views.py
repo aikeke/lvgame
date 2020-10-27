@@ -9,6 +9,7 @@ from src import crontab_check
 from src import update_register_check
 from src import version_check
 from src import game_status
+from src import login_status
 from src import modify_host
 from src import modify_iptables
 from src import get_logger
@@ -66,6 +67,12 @@ def game_check(request):
     data=game_status.check()
     sm,zxy=sep(data)
     return render(request,'game_check.html',{"sm": sm,"zxy":zxy})
+
+@check_login
+def login_check(request):
+    data=login_status.check()
+    sm,zxy=sep(data)
+    return render(request,'login_check.html',{"sm": sm,"zxy":zxy})
 
 @check_login
 def cron(request):
