@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lvanops',
         'USER':'root',
-        'PASSWORD':'iwgame.hl100',
+        'PASSWORD':'xxx',
         'HOST':'127.0.0.1',
         'PORT':'3306',
     }
