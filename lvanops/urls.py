@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^ver/', views.ver),
     url(r'^cron/', views.cron),
     url(r'^update/', views.update),
+    url(r'^hostinfo/api/', views.hostinfo_api),
     url(r'^host/', views.host),
     url(r'^iptables', views.iptables),
     url(r'^/*',views.login),

@@ -34,6 +34,20 @@ def sep(data):
     return sm,zxy
 # Create your views here.
 
+def hostinfo_api(request):
+    if request.method=='POST':
+        hostname=request.POST.get('hostname','')
+        inner_ip=request.POST.get('inner_ip')
+        outer_ip=request.POST.get('outer_ip','')
+        disk_size=request.POST.get('disk_size','')
+        memory=request.POST.get('memory','')
+        cpu=request.POST.get('cpu','')
+        models.HostInfo.objects.filter(inner_ip=inner_ip).delete()
+        models.HostInfo.objects.create(hostname=hostname,inner_ip=inner_ip,outer_ip=outer_ip,disk_size=disk_size,memory=memory,cpu=cpu)
+        return HttpResponse(' info post ok')
+    else:
+        return HttpResponse('ok')
+
 @check_login
 def index(request):
     return render(request,'index.html')
