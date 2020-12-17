@@ -22,11 +22,12 @@
             font-size: 18px;
         }
         .iptables_rules a{
+            display: none;
+        }
+        .iptables_rules:hover a{
+            display: block;
             font-size: 15px;
         }
-	.hide {
-	    display: none;
-	}
     </style>
 </head>
 <body>
@@ -43,24 +44,15 @@
             <a href="/ver/">蜀醉版本号</a><br/>
             <a href="/cron/">蜀醉定时任务检查</a><br/>
             <a href="/ftp_file/">批量拉取文件</a><br/>
-            <a onclick="showMenu();">防火墙策略(维护用)
-              <div value=1 id='ip1' class="hide">
-               <a href="/iptables?rules=lgoff">所有登录服务器对内</a><br/>
-               <a href="/iptables?rules=lgon">所有登录服务器对外</a><br/>
-               <a href="/iptables?rules=gmoff">所有游戏服务器对内</a><br/>
-               <a href="/iptables?rules=gmon">所有游戏服务器对外</a><br/>
+            <div class="iptables_rules">防火墙策略(维护用)<br/>
+              <a href="/iptables?rules=lgoff">所有登录服务器对内</a>
+              <a href="/iptables?rules=lgon">所有登录服务器对外</a>
+              <a href="/iptables?rules=gmoff">所有游戏服务器对内</a>
+              <a href="/iptables?rules=gmon">所有游戏服务器对外</a>
             </div>
-	    </a>
         </div>
         <div style="position: fixed;top: 48px;left: 200px;right: 0px;bottom: 0;background-color: white;text-align:center;font-weight: 800;overflow:auto;white-space:pre;">{% block content %} {% endblock %}
         </div>
     </div>
-<script type="text/javascript">
-    function showMenu(){
-	var tag=document.getElementById('ip1');
-	if (tag.getAttribute("value")=="1"){tag.classList.remove("hide");tag.setAttribute("value",0);}
-	else{tag.classList.add("hide");tag.setAttribute("value","1");}
-	}
-</script>
 </body>
 </html>
